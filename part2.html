@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let choice;
+      let store = [];
+      do {
+        choice = +prompt(`
+            1.Thêm sản phẩm vào danh sách sản phẩm.
+            2.Hiển thị tất cả sản phẩm.
+            3.Hiển thị chi tiết sản phẩm theo id.
+            4.Cập nhật thông tin sản phẩm (name, price, category, quantity) theo id sản phẩm.             
+            5.Xóa sản phẩm theo id.
+            6.Lọc sản phẩm theo khoảng giá.
+            7.Thoát.
+            Mời nhập lựa chọn:
+            `);
+        switch (choice) {
+            case 1: 
+                let id = +prompt("Mời nhập mã định danh của sản phẩm");
+                let name = prompt("Mời nhập tên của sản phẩm");
+                let price = +prompt("Mời nhập giá của sản phẩm");
+                let category = prompt("Mời nhập danh mục sản phẩm");
+                let quantity = +prompt("Mời nhập số lượng sản phẩm trong kho");
+                let product = {
+                    id: id,
+                    name: name,
+                    price: price,
+                    category: category,
+                    quantity: quantity,
+                };
+                store.push(product);
+                alert("Thêm thành công sản phẩm vào kho");  
+                break;
+            case 2: 
+                for (let i in store) {
+                    console.log("ID:", store[i].id);
+                    console.log("Name:", store[i].name);
+                    console.log("Price:", store[i].price);
+                    console.log("Category:", store[i].category);
+                    console.log("Quanlity:", store[i].category);
+                    console.log("============================");
+                }
+                break;
+            case 3: 
+                let findIdProduct = +prompt("Mời nhập mã sản phẩm cần tìm");
+                let findProduct = store.find(e => e.id === findIdProduct);
+                console.log(findIdProduct);
+                break;
+            case 4: 
+                let findIdUpdate = +prompt("Mời nhập mã sản phẩm cần cập nhật");
+                let updateProduct = store.find(e => e.id === findIdProduct);
+                let choiceMenu = +prompt(`
+                1. Cập nhật tên sản phẩm.
+                2. Cập nhật giá của sản phẩm.
+                3. Cập nhật danh mục sản phẩm.
+                4. Cập nhật số lượng sản phẩm trong kho.
+                5. Thoát.
+                Mời nhập lựa chọn:`);
+                do {
+                    switch (choiceMenu) {
+                        case 1: 
+                            let newName = prompt("Mời nhập tên mới của sản phẩm");
+                            updateProduct.name = newName;
+                            alert("Cập nhật tên sản phẩm thành công !!!!!");
+                            break;
+                        case 2: 
+                            let newPrice = +prompt("Mời nhập giá mới của sản phẩm");
+                            updateProduct.price = newPrice;
+                            alert("Cập nhật giá của sản phẩm thành công !!!!!");
+                            break;
+                        case 3: 
+                            let updateCategory = prompt("Mời nhập danh mục mới của sản phẩm");
+                            updateProduct.category = updateCategory;
+                            alert("Cập nhật danh mục của danh mục thành công !!!!!");
+                            break;
+                        case 4: 
+                           let updateQuality = +prompt("Mời nhập số lượng mới của sản phẩm trong kho");
+                           updateProduct.quantity = updateQuality;
+                           alert("Cập nhật số lượng mới sản phẩm thành công !!!!!");
+                           break;
+                        case 5: 
+                           alert("Quay về màn hình chính");
+                           break;
+                        default:
+                           alert("Kí tự không hợp lệ. Mời nhập lại lựa chọn.");
+                           break;
+                    }
+                } while (choiceMenu !== 5);
+                break;
+            case 5: 
+                let findIdDelete = +prompt("Mời nhập mã sản phẩm muốn xoá");
+                let productDelete = store.findIndex(e => e.id === findIdDelete);
+                store.splice(productDelete, 1);
+                alert("Xoá sản phẩm trong kho hàng thành công");
+                break;
+            case 6:
+                let aboutPrice = +prompt("Mời nhập giá bất kì mà sản phẩm giao động");
+                let filter = store.filter(e => e.price >= aboutPrice);
+                console.log(filter);
+                break;
+            case 7: 
+                alert("Chương trình kết thúc");
+                break;
+            default: 
+                alert("Kí tự không hợp lệ. Vui lòng nhập lại.");
+                break;
+        }
+      } while (choice !== 7);
+    </script>
+  </body>
+</html>

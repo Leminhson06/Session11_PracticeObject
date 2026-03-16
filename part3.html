@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let choice;
+        let shop = [];
+        do {
+            choice = +prompt(`
+            1. Thêm món ăn vào danh mục.
+            2. Xoá món ăn theo tên khỏi danh mục.
+            3. Cập nhật thông tin theo tên của món ăn  (tên, giá, mô tả)
+            4. Hiển thị toàn bộ menu gồm từng danh mục và từng món ăn.
+            5. Tìm kiếm món ăn theo tên trong toàn bộ menu.
+            6. Thoát.
+            -------------------------------------------------------------
+            Mời nhập lựa chọn:`);
+            switch (choice) {
+                case 1: 
+                    let nameFood = prompt("Mời nhập tên món ăn");
+                    let priceFood = +prompt("Mời nhập giá món ăn");
+                    let reviewFood = prompt("Mời nhập mô tả về món ăn");
+                    let food = {
+                        name: nameFood,
+                        price: priceFood,
+                        review: reviewFood,
+                    };
+                    shop.push(food);
+                    alert("Thêm món ăn thành công !!!!!");
+                    break;
+                case 2:
+                    let findNameDelete = prompt("Mời nhập tên món ăn cần xoá");
+                    let deleteFood = shop.find(e => e.name === findNameDelete);
+                    if (deleteFood === -1) {
+                        alert("Không tồn tại món ăn trong danh sách");
+                    } else {
+                        shop.splice(deleteFood, 1);
+                        console.log("Thực đơn:");
+                        for (let index in shop) {
+                            console.log("Name:", shop[index].name);
+                            console.log("Phone:", shop[index].price);
+                            console.log("Recomment:", shop[index].review);
+                        }
+                    }
+                    break;
+                case 3:
+                    let findNameUpdate = prompt("Mời nhập tên món ăn cần cập nhật");
+                    let updateFood = shop.find(e => e.name === findNameUpdate);
+                    if (updateFood === -1) {
+                        alert("Không tồn tại món ăn trong danh sách");
+                    } else {
+                        do {
+                            let choiceListUpdate = +prompt(`
+                            1. Cập nhật tên món ăn.
+                            2. Cập nhật giá món ăn.
+                            3. Cập nhật mô tả món ăn.
+                            4. Thoát.
+                            Mời nhập lựa chọn:`);
+                            switch (choiceListUpdate) {
+                                case 1: 
+                                    let nameUpdate = prompt("Thay đổi tên món ăn");
+                                    updateFood.name = nameUpdate;
+                                    alert("Cập nhật tên món ăn thành công !!!!");
+                                    break;
+                                case 2: 
+                                    let priceUpdate = +prompt("Cập nhật giá món ăn");
+                                    updateFood.price = priceUpdate;
+                                    alert("Cập nhật giá món ăn thành công !!!!");
+                                    break;
+                                case 3: 
+                                    let reviewFood = prompt("Cập nhật mô tả món ăn");
+                                    updateFood.review = reviewFood;
+                                    alert("Cập nhật mô tả món ăn thành công !!!!");
+                                    break;
+                                case 4: 
+                                    alert("Kết thúc chương trình cập nhật !!!!!");
+                                    break;
+                                default: 
+                                    alert("Kí tự không hợp lệ. Mời nhập lại yêu cầu.");
+                                    break;
+                            }
+                        } while (choiceListUpdate !== 4);
+                    }
+                    break;
+                case 4: 
+                    console("Danh sách tất cả các món ăn:");
+                    let total = 0;
+                    for (let i in shop) {
+                        total++;
+                        console(`${total} - ${shop[i].name} - Giá món: ${shop[i].price} - Mô tả: ${shop[i].review}.`);
+                    }
+                    break;
+                case 5:
+                    let findFood = prompt("Mời nhập món ăn cần tìm");
+                    let findFoodInList = shop.find(e => e.name === findFood);
+                    if (findFoodInList === -1) {
+                        alert("Không tồn tại món ăn trong danh sách");
+                    } else {
+                        for (let i in shop) {
+                            console(`${shop[i].name} - Giá món: ${shop[i].price} - Mô tả: ${shop[i].review}.`);
+                        }
+                    }
+                    break;
+                case 6: 
+                    break;
+                default: 
+                    break;
+            }
+        } while (choice !== 6);
+    </script>
+</body>
+</html>

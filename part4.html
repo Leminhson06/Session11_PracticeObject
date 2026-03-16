@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let choice;
+        let job = [];
+        do {
+            switch (choice) {
+                case 1: 
+                    let id = +prompt("Mời nhập mã công việc");
+                    let nameJob = prompt("Mời nhập tên công việc");
+                    let review = prompt("Mô tả công việc");
+                    let startTime = +prompt("Mời nhập thời gian bắt đầu");
+                    let status = +prompt(`
+                    1. Hoàn thành.
+                    2. Không hoàn thành.
+                    `);
+                    let statusText = status === 1 ? "Hoàn thành" : "Không hoàn thành";
+                    let work = {
+                        id: id,
+                        name: nameJob,
+                        review: review,
+                        time: startTime,
+                        status: statusText,
+                    };
+                    job.push(work);
+                    alert("Thêm thành công công việc vào danh sách thông kê");
+                    break;
+                case 2: 
+                    console.log("Danh sách công việc:");
+                    for (let i in job) {
+                        console.log(`
+                        Mã công việc: ${job[i].id}.
+                        Tên công việc: ${job[i].name}.
+                        Mô tả công việc: ${job[i].review}.
+                        Thời gian bắt đầu công việc: ${job[i].time}h.
+                        Trạng thái công việc: ${status}.
+                        `);
+                    }
+                    break;
+                case 3: 
+                    let updateListJob;
+                    let findIdUpdate = +prompt("Mời nhập id của công việc cần cập nhật");
+                    let findUpdate = job.find(s => s.id === findIdUpdate);
+                    do {
+                        updateListJob = +prompt(`
+                        ==========HỆ THỐNG CẬP NHẬT===========
+                        1. Cập nhật id công việc.
+                        2. Cập nhật tên công việc.
+                        3. Cập nhật phần mô tả.
+                        4. Cập nhật thời gian bắt đầu công việc.
+                        5. Cập nhật trạng thái.
+                        6. Thoát.
+                        ======================================
+                        Mời bạn nhập lựa chọn:`);
+                        switch (updateListJob) {
+                            case 1: 
+                                let updateId = +prompt("Nhập id mới cho id công việc");
+                                findIdUpdate.id = updateId;
+                                alert("Cập nhật id công việc thành công !!!!");
+                                break;
+                            case 2:
+                                let updateName = prompt("Nhập tên mới cho công việc");
+                                findUpdate.name = updateName;
+                                alert("Cập nhật tên công việc thành công !!!!");
+                                break;
+                            case 3:
+                                let updateReview = prompt("Mô tả mới về công việc");
+                                findUpdate.review = updateReview;
+                                alert("Cập nhật phần mô tả công việc thành công !!!!");
+                                break;
+                            case 4:
+                                let updateTime = +prompt("Nhập thời gian công việc cần cập nhật");
+                                findUpdate.time = updateTime;
+                                alert("Cập nhật thời gian bắt đầu công việc thành công !!!!");
+                                break;
+                            case 5:
+                                let updateStatus = +prompt(`
+                                1. Hoàn thành.
+                                2. Không hoàn thành.`);
+                                let statusUpdate = updateStatus === 1 ? "Hoàn thành" : "Không hoàn thành";
+                                findUpdate.status = statusUpdate;
+                                alert("Cập nhật trạng thái hoạt động công việc thành công !!!!");
+                                break;
+                            case 6:
+                                alert("Thoát chương trình cập nhật công việc");
+                                break;
+                            default:
+                                alert("Kí tự không hợp lệ. Vui lòng nhập lại");
+                                break;
+                        }
+                    } while (updateListJob !== 6);
+                    break;
+                case 4: 
+                    let findStatus = +prompt(`
+                    1. Hoàn thành.
+                    2. Không hoàn thành.`);
+                    let chooseStatus = findStatus === 1 ? "Hoàn thành" : "Không hoàn thành";
+                    let filterStatus = job.filter(e => e.status === chooseStatus);
+                    console.log(filterStatus);
+                    break;
+                case 5: 
+                    job.sort((a, b) => {
+                        let statusSort = {
+                            'Hoàn thành' : 1,
+                            'Không hoàn thành' : 2,
+                        }
+                        return job[a.status] - job[b.status];
+                    });
+                    console.log(job);
+                    break;
+                case 6: 
+                    alert("Chương trình kết thúc !!!!!");
+                    break;
+                default: 
+                    alert("Kí tự không hợp lệ. Vui lòng nhập lại !!!!");
+                    break;
+            }
+        } while (choice !== 6);
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let choice;
+      let contact = [];
+      do {
+        choice = +prompt(`
+            ===============================
+            1. Thêm đối tượng Contact vào danh sách liên hệ.
+            2. Hiện thị danh sách danh bạ
+            3. Tìmd kiếm thông tin Contact theo số điện thoại.
+            4. Cập nhật thông tin Contact(name, email, phone) theo id.
+            5. Xoá đối tượng Contact khỏi danh sách danh bạ theo id.
+            6. Thoát.
+            ===============================
+            Mời bạn nhập lựa chọn:
+            `);
+        switch (choice) {
+          case 1:
+            let newId = +prompt("Mời nhập căn cước công dân của liên hệ mới");
+            let newName = prompt("Mời nhập tên của người liên hệ");
+            let newEmail = prompt("Mời nhập email của người liên hệ");
+            let newPhone = prompt("Mời nhập số điện thoại của người liên hệ");
+            let personContact = {
+                id: newId,
+                name: newName,
+                email: newEmail,
+                phone: newPhone,
+            };
+            contact.push(personContact);
+            alert("Thêm người liên hệ vào danh bạ thành công !!!!!!");
+            break;
+          case 2:
+            for (let index in contact) {
+                console.log("Id:", contact[index].id);
+                console.log("Name:", contact[index].name);
+                console.log("Email:", contact[index].email);
+                console.log("Phone Number:", contact[index].phone);
+            }
+            break;
+          case 3:
+            let findPhoneNumber = prompt("Mời nhập số điện thoại của người liên hệ cần tìm");
+            for (let index of contact) {
+                if (findPhoneNumber === index.phone) {
+                    console.log("Id:", index.id);
+                    console.log("Name:", index.name);
+                    console.log("Email:", index.email);
+                } else {
+                    alert("Liên hệ không tồn tại trong danh bạ");
+                }
+            }
+            break;
+          case 4:
+            let findIdContactPerson = +prompt("Mời nhập id của người cần cập nhật");
+            let person = contact.find(p => p.id === findIdContactPerson);
+            if (!person) {
+                alert("Không tồn tại id của người liên hệ");
+                return;
+            }
+            let choiceUpdate;
+            do {
+                choiceUpdate = +prompt(`
+                1. Mời nhập tên mới của người liên hệ.
+                2. Mời nhập email mới của người liên hệ.
+                3. Mời nhập phone mới của người liên hệ.
+                4. Thoát.
+                Mời nhập lựa chọn:
+                `);
+                switch (choiceUpdate) {
+                    case 1: 
+                        let updateName = prompt("Mời nhập tên mới của người liên hệ");
+                        person.name = updateName;
+                        alert("Cập nhật thành công !!!!!");
+                        break;
+                    case 2: 
+                        let updateEmail = prompt("Mời nhập email mới của người liên hệ");
+                        person.email = updateEmail;
+                        alert("Cập nhật thành công !!!!!");
+                        break;
+                    case 3: 
+                        let updatePhone = prompt("Mời nhập số điện thoại mới của người liên hệ");
+                        person.phone = updatePhone;
+                        alert("Cập nhật thành công !!!!!");
+                        break;
+                    case 4: 
+                        alert("Thoát ra khỏi hệ thống cập nhật của người dùng");
+                        break;
+                    default: 
+                        alert("Kí tự không hợp lệ. Mời bạn nhập lại.");
+                        break;
+                }
+            } while (choiceUpdate !== 4);
+            break;
+          case 5:
+            let findDeleteId = +prompt("Mời nhập id của người liên hệ cần xoá");
+            let personDelete = contact.find(e => e.id === findDeleteId);
+            if (!personDelete) {
+                alert("Không tồn tại id của người liên hệ");
+                return;
+            }
+            let index = contact.indexOf(e => e.id === findDeleteId);
+            contact.splice(index, 1);
+            alert("Xoá người liên hệ thành công !!!!!");
+            break;
+          case 6:
+            alert("Chương trình kết thúc !!!!!");
+            break;
+          default:
+            alert("Kí tự không hợp lệ. Mời nhập lại lựa chọn");
+            break;
+        }
+      } while (choice !== 6);
+    </script>
+  </body>
+</html>

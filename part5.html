@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let choice;
+      let account = [];
+      do {
+        choice = +prompt(`
+            ========= USER =========
+            1. Đăng ký người dùng mới.
+            2. Đăng nhập người dùng.
+            3. Thoát.
+            ========================
+            Mời nhập lựa chọn:
+            `);
+        switch (choice) {
+          case 1:
+            let username = prompt("Mời nhập tên đăng nhập");
+            let inputEmail = prompt("Mời nhập email của bạn");
+            break;
+          case 2:
+            
+            break;
+          case 3:
+            break;
+          default:
+            break;
+        }
+      } while (choice !== 3);
+    </script>
+  </body>
+</html>
