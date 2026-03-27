@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let students = [];
+      let currentId = 1;
+
+      function showMenu() {
+        return +prompt(`
+========= STUDENT MANAGEMENT =========
+1. Create Student
+2. Read All Students
+3. Filter Scholarship Candidates (GPA > 8)
+4. Update Student Profile
+5. Delete Student
+6. Compliance Verification
+7. Academic Statistics (Average GPA)
+8. Data Normalization (UPPERCASE name)
+0. Exit
+=====================================
+Enter your choice:
+`);
+      }
+
+      function createStudent() {
+        let name = prompt("Enter name:");
+        let age = +prompt("Enter age:");
+        let gpa = +prompt("Enter GPA:");
+        let status = prompt("Enter status (active/inactive):");
+
+        let student = {
+          id: currentId++,
+          name,
+          age,
+          gpa,
+          status,
+        };
+
+        students.push(student);
+        alert("Student created successfully!");
+      }
+
+      function readStudents() {
+        if (students.length === 0) {
+          console.log("No students found.");
+          return;
+        }
+
+        console.table(students);
+      }
+
+      function filterScholarship() {
+        let result = students.filter((s) => s.gpa > 8);
+        console.table(result);
+      }
+
+      function updateStudent() {
+        let id = +prompt("Enter student ID to update:");
+        let student = students.find((s) => s.id === id);
+
+        if (!student) {
+          alert("Student not found!");
+          return;
+        }
+
+        let newName = prompt("Enter new name:");
+        let newGpa = +prompt("Enter new GPA:");
+
+        student.name = newName;
+        student.gpa = newGpa;
+
+        alert("Updated successfully!");
+      }
+
+      function deleteStudent() {
+        let id = +prompt("Enter student ID to delete:");
+        let index = students.findIndex((s) => s.id === id);
+
+        if (index === -1) {
+          alert("Student not found!");
+          return;
+        }
+
+        students.splice(index, 1);
+        alert("Deleted successfully!");
+      }
+
+      function complianceCheck() {
+        let hasUnder18 = students.some((s) => s.age < 18);
+        let allActive = students.every((s) => s.status === "active");
+
+        console.log("Có sinh viên < 18 tuổi:", hasUnder18);
+        console.log("Tất cả đều active:", allActive);
+      }
+
+      function averageGPA() {
+        if (students.length === 0) {
+          console.log("No data.");
+          return;
+        }
+
+        let sum = students.reduce((acc, s) => acc + s.gpa, 0);
+        let avg = sum / students.length;
+
+        console.log("Average GPA:", avg.toFixed(2));
+      }
+
+      function normalizeData() {
+        let newList = students.map((s) => ({
+          ...s,
+          name: s.name.toUpperCase(),
+        }));
+
+        console.table(newList);
+      }
+      let choice;
+      do {
+        choice = showMenu();
+
+        switch (choice) {
+          case 1:
+            createStudent();
+            break;
+          case 2:
+            readStudents();
+            break;
+          case 3:
+            filterScholarship();
+            break;
+          case 4:
+            updateStudent();
+            break;
+          case 5:
+            deleteStudent();
+            break;
+          case 6:
+            complianceCheck();
+            break;
+          case 7:
+            averageGPA();
+            break;
+          case 8:
+            normalizeData();
+            break;
+          case 0:
+            alert("Goodbye!");
+            break;
+          default:
+            alert("Invalid choice!");
+        }
+      } while (choice !== 0);
+    </script>
+  </body>
+</html>
